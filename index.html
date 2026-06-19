@@ -6,26 +6,32 @@
     <title>NRP Generator Digital TNI AD</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
+    <!-- Font & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SheetJS untuk Rekap Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
+    <!-- Halaman Login Utama -->
     <div id="login-page" class="auth-container">
         <div class="logo-container">
+            <!-- Logo Komunitas AFI -->
             <img src="https://tareqwavlgqoexxffuuc.supabase.co/storage/v1/object/sign/Logo_Website/Logo_Website/file_0000000018e071fab28396ba3dc0a65d.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNWIxNTEyZS03YTE5LTQzY2UtYWUxNC00ZmRkNzMyZmIyODMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJMb2dvX1dlYnNpdGUvTG9nb19XZWJzaXRlL2ZpbGVfMDAwMDAwMDAxOGUwNzFmYWIyODM5NmJhM2RjMGE2NWQucG5nIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MTgyNzE3NCwiZXhwIjoxODEzMzYzMTc0fQ.NlIezpUA2-dBnCYKA29fvjrOC-ErzBv7L8j3mxinles" alt="Logo AFI" class="main-logo-img">
             
             <h1 class="main-title">NRP GENERATOR DIGITAL</h1>
             <p class="subtitle">[AFI] ARMED FORCE INDONESIA</p>
         </div>
         
+        <!-- Animasi Teks Berjalan -->
         <div class="marquee-container">
             <div class="marquee-text">
                 -[AFI] ARMED FORCE INDONESIA- -MENJAGA KEDAULATAN NEGARA DEMI RAKYAT INDONESIA- -HAK MILIK COMMUNITY AFI-
             </div>
         </div>
 
+        <!-- Form Input Login -->
         <form id="login-form" class="card">
             <h3><i class="fas fa-lock"></i> LOG IN SYSTEM</h3>
             <hr>
@@ -43,6 +49,7 @@
         </form>
     </div>
 
+    <!-- Halaman Dashboard Kontrol (Admin, Moderator, Owner) -->
     <div id="dashboard-page" class="dashboard-container hidden">
         <header class="dashboard-header">
             <div class="user-profile">
@@ -55,10 +62,12 @@
         </header>
 
         <main class="dashboard-content">
+            <!-- SEKSI GENERATOR: Bisa diakses oleh Admin, Moderator, dan Owner -->
             <section id="section-generator" class="card row-section">
                 <h3><i class="fas fa-cogs"></i> GENERATOR NRP TNI AD</h3>
                 <hr>
                 
+                <!-- Pilihan Mode Pembuatan: Hanya Muncul untuk Hak Akses Owner -->
                 <div id="owner-nrp-options" class="hidden input-group">
                     <label for="nrp-mode">Mode Pembuatan NRP</label>
                     <select id="nrp-mode">
@@ -82,8 +91,10 @@
                 </div>
             </section>
 
+            <!-- SEKSI KHUSUS OWNER: Tersembunyi secara mutlak dari Admin & Moderator -->
             <section id="section-owner-only" class="hidden">
                 
+                <!-- Menu Kelola Akun Admin & Moderator -->
                 <div class="card row-section">
                     <h3><i class="fas fa-users-cog"></i> Kelola Akses Admin & Moderator</h3>
                     <hr>
@@ -99,6 +110,7 @@
                         </button>
                     </form>
 
+                    <!-- Tabel Status Kehadiran Online/Offline & Hapus Akses -->
                     <div class="table-container">
                         <table id="table-users">
                             <thead>
@@ -110,12 +122,15 @@
                                 </tr>
                             </thead>
                             <tbody id="user-list-tbody">
-                                </tbody>
+                                <!-- Data akun Admin & Moderator dimuat real-time di sini -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
 
+                <!-- Pembagian Grid Fitur Rekap Excel & Pengaturan Tema Global -->
                 <div class="grid-2-col">
+                    <!-- Menu Rekap Excel -->
                     <div class="card">
                         <h3><i class="fas fa-file-excel"></i> Rekap Data Log NRP</h3>
                         <hr>
@@ -127,6 +142,7 @@
                         </button>
                     </div>
 
+                    <!-- Menu Setelan Background Global -->
                     <div class="card">
                         <h3><i class="fas fa-sliders-h"></i> Pengaturan Tema Global</h3>
                         <hr>
@@ -147,11 +163,13 @@
         </main>
     </div>
 
+    <!-- Bagian Kaki Halaman (Footer) Berwarna Hitam -->
     <footer class="footer-bottom">
         <p>© 2026 [AFI] ARMED FORCE INDONESIA</p>
         <p class="managed-by">Dikelola oleh: @Nathanael_0918</p>
     </footer>
 
+    <!-- Logika Penghubung Firebase Realtime SDK -->
     <script type="module" src="script.js"></script>
 </body>
 </html>
