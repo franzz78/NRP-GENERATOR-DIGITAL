@@ -6,18 +6,16 @@
     <title>NRP Generator Digital TNI AD</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <!-- Font & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <!-- SheetJS untuk Rekap Excel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
-    <!-- Halaman Login -->
     <div id="login-page" class="auth-container">
         <div class="logo-container">
-            <div class="army-logo">🪖</div>
+            <img src="https://tareqwavlgqoexxffuuc.supabase.co/storage/v1/object/sign/Logo_Website/Logo_Website/file_0000000018e071fab28396ba3dc0a65d.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9kNWIxNTEyZS03YTE5LTQzY2UtYWUxNC00ZmRkNzMyZmIyODMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJMb2dvX1dlYnNpdGUvTG9nb19XZWJzaXRlL2ZpbGVfMDAwMDAwMDAxOGUwNzFmYWIyODM5NmJhM2RjMGE2NWQucG5nIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4MTgyNzE3NCwiZXhwIjoxODEzMzYzMTc0fQ.NlIezpUA2-dBnCYKA29fvjrOC-ErzBv7L8j3mxinles" alt="Logo AFI" class="main-logo-img">
+            
             <h1 class="main-title">NRP GENERATOR DIGITAL</h1>
             <p class="subtitle">[AFI] ARMED FORCE INDONESIA</p>
         </div>
@@ -29,69 +27,76 @@
         </div>
 
         <form id="login-form" class="card">
-            <h3>LOG IN SYSTEM</h3>
+            <h3><i class="fas fa-lock"></i> LOG IN SYSTEM</h3>
+            <hr>
             <div class="input-group">
-                <label>Username</label>
+                <label for="username">Username</label>
                 <input type="text" id="username" required placeholder="Masukkan Username">
             </div>
             <div class="input-group">
-                <label>Password</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" required placeholder="Masukkan Password">
             </div>
-            <button type="submit" class="btn btn-primary">MASUK</button>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                <i class="fas fa-sign-in-alt"></i> MASUK
+            </button>
         </form>
     </div>
 
-    <!-- Halaman Dashboard Utama (Admin, Moderator, Owner) -->
     <div id="dashboard-page" class="dashboard-container hidden">
         <header class="dashboard-header">
             <div class="user-profile">
                 <span id="user-badge" class="badge">Role</span>
                 <span id="user-display-name">Username</span>
             </div>
-            <button id="btn-logout" class="btn btn-danger">Keluar</button>
+            <button id="btn-logout" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> Keluar
+            </button>
         </header>
 
         <main class="dashboard-content">
-            <!-- SEKSI 1: Generator NRP (Akses: Semua Role) -->
             <section id="section-generator" class="card row-section">
                 <h3><i class="fas fa-cogs"></i> GENERATOR NRP TNI AD</h3>
                 <hr>
                 
-                <!-- Opsi Custom Hanya untuk Owner -->
                 <div id="owner-nrp-options" class="hidden input-group">
-                    <label>Mode Pembuatan NRP</label>
+                    <label for="nrp-mode">Mode Pembuatan NRP</label>
                     <select id="nrp-mode">
-                        <option value="random">Acak / Otomatis</option>
-                        <option value="custom">Custom (Manual)</option>
+                        <option value="random">Acak / Otomatis (Admin & Mod)</option>
+                        <option value="custom">Custom / Manual (Hanya Owner)</option>
                     </select>
                 </div>
 
-                <div class="input-group" id="custom-nrp-input-container">
-                    <label>Nomor NRP</label>
-                    <input type="text" id="nrp-output" placeholder="NRP akan muncul di sini" readonly>
+                <div class="input-group">
+                    <label for="nrp-output">Nomor NRP Hasil Pembuatan</label>
+                    <input type="text" id="nrp-output" placeholder="Klik tombol di bawah untuk membuat NRP" readonly style="font-family: 'Orbitron', sans-serif; font-weight: bold; letter-spacing: 2px; text-align: center; font-size: 18px; color: #4caf50;">
                 </div>
 
-                <div class="action-buttons">
-                    <button id="btn-generate" class="btn btn-success">Buat NRP</button>
-                    <button id="btn-save-nrp" class="btn btn-primary hidden">Simpan ke Database</button>
+                <div class="action-buttons" style="display: flex; gap: 10px;">
+                    <button id="btn-generate" class="btn btn-success" style="flex: 1;">
+                        <i class="fas fa-random"></i> Buat NRP Acak
+                    </button>
+                    <button id="btn-save-nrp" class="btn btn-primary hidden" style="flex: 1;">
+                        <i class="fas fa-save"></i> Simpan NRP Custom
+                    </button>
                 </div>
             </section>
 
-            <!-- SEKSI 2: Manajemen User & Rekap (Akses: Hanya Owner) -->
             <section id="section-owner-only" class="hidden">
-                <!-- Kelola Admin / Mod -->
+                
                 <div class="card row-section">
                     <h3><i class="fas fa-users-cog"></i> Kelola Akses Admin & Moderator</h3>
                     <hr>
-                    <form id="register-member-form" class="horizontal-form">
-                        <input type="text" id="reg-username" placeholder="Username Baru" required>
-                        <input type="password" id="reg-password" placeholder="Password" required>
-                        <select id="reg-role">
+                    <form id="register-member-form" class="horizontal-form" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+                        <input type="text" id="reg-username" placeholder="Username Baru" required style="flex: 1; min-width: 150px;">
+                        <input type="password" id="reg-password" placeholder="Password Akun" required style="flex: 1; min-width: 150px;">
+                        <select id="reg-role" style="flex: 1; min-width: 130px;">
                             <option value="admin">Admin</option>
                             <option value="moderator">Moderator</option>
                         </select>
-                        <button type="submit" class="btn btn-success">Daftarkan</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-user-plus"></i> Daftarkan Anggota
+                        </button>
                     </form>
 
                     <div class="table-container">
@@ -99,34 +104,42 @@
                             <thead>
                                 <tr>
                                     <th>Username</th>
-                                    <th>Role</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
+                                    <th>Tingkat Jabatan (Role)</th>
+                                    <th>Status Koneksi</th>
+                                    <th>Tindakan Akses</th>
                                 </tr>
                             </thead>
                             <tbody id="user-list-tbody">
-                                <!-- Data User Termuat Dinamis -->
-                            </tbody>
+                                </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Rekap & Settings -->
                 <div class="grid-2-col">
                     <div class="card">
-                        <h3><i class="fas fa-file-excel"></i> Rekap Data</h3>
+                        <h3><i class="fas fa-file-excel"></i> Rekap Data Log NRP</h3>
                         <hr>
-                        <p>Total data NRP terdaftar dapat diekspor langsung ke spreadsheet format Excel.</p>
-                        <button id="btn-export-excel" class="btn btn-excel">Unduh Rekap Excel</button>
+                        <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 20px; line-height: 1.5;">
+                            Unduh seluruh riwayat nomor urut NRP TNI AD yang telah dibuat oleh seluruh jajaran staf ke dalam format lembar kerja Excel (.xlsx).
+                        </p>
+                        <button id="btn-export-excel" class="btn btn-excel">
+                            <i class="fas fa-download"></i> Unduh Rekap Excel
+                        </button>
                     </div>
 
                     <div class="card">
-                        <h3><i class="fas fa-sliders-h"></i> Pengaturan Global</h3>
+                        <h3><i class="fas fa-sliders-h"></i> Pengaturan Tema Global</h3>
                         <hr>
-                        <label>Tema Website (Semua Pengguna)</label>
-                        <div class="theme-switch-wrapper">
-                            <button id="btn-theme-light" class="btn btn-outline">Terang</button>
-                            <button id="btn-theme-dark" class="btn btn-outline">Gelap</button>
+                        <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 15px;">
+                            Ubah warna latar belakang sistem secara global untuk dilihat oleh seluruh pengguna secara real-time.
+                        </p>
+                        <div class="theme-switch-wrapper" style="display: flex; gap: 10px;">
+                            <button id="btn-theme-light" class="btn btn-outline" style="flex: 1;">
+                                <i class="fas fa-sun"></i> Mode Terang (White)
+                            </button>
+                            <button id="btn-theme-dark" class="btn btn-outline" style="flex: 1;">
+                                <i class="fas fa-moon"></i> Mode Gelap (Dark)
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -134,13 +147,11 @@
         </main>
     </div>
 
-    <!-- Footer -->
     <footer class="footer-bottom">
-        <p>@2026 [AFI] ARMED FORCE INDONESIA</p>
+        <p>© 2026 [AFI] ARMED FORCE INDONESIA</p>
         <p class="managed-by">Dikelola oleh: @Nathanael_0918</p>
     </footer>
 
-    <!-- Firebase App & Database via SDK CDN -->
     <script type="module" src="script.js"></script>
 </body>
 </html>
